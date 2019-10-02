@@ -14,7 +14,7 @@ namespace LemonadeStand
         Weather weather = new Weather();
         public static int currentDay;
         public int totalDays;
-
+        
         // constructor
         public Game()
         {
@@ -25,46 +25,32 @@ namespace LemonadeStand
         public void StartGame()
         {
             
-            Introduction();
-            DisplayInstructions();
+            UserInterface.Introduction();
+            UserInterface.DisplayInstructions();
             totalDays = DaysSelector();
             weather.CreateWeather();
-            MenuReadout();
+            
             
             for (currentDay = 1; currentDay <= totalDays; currentDay++)
             {
                 Store store = new Store(player);
-                store.DisplayStore();
+                store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature());
+                Console.WriteLine("aow it's the day time");
+                Console.ReadLine();
             }
         }
 
-        public void Introduction()
-        {
-            Console.WriteLine("Welcome to Lemonade Stand.");
-            Console.WriteLine();
-            Console.WriteLine("Developed by Jacob Stilin.");
-            Console.WriteLine();
-            Console.WriteLine("Press Enter to begin.");
-            Console.ReadLine();
-        }
 
-        public void DisplayInstructions()
+        
+        public int DaysSelector() // fix if user just pushes enter
         {
             Console.Clear();
-            Console.WriteLine("Here is some rules for you to follow");
-            Console.WriteLine("Press Enter to proceed");
-            Console.ReadLine();
-        }
-
-        public int DaysSelector()
-        {
-            Console.Clear();
-            int days;
+            int days = 1;
             do
             {
-                
                 Console.WriteLine("How many days will this game last? Please enter a number between 7 and 30.");
                 days = Int32.Parse(Console.ReadLine());
+
                 if (days < 7 || days > 30)
                 {
                     Console.Clear();
@@ -77,14 +63,6 @@ namespace LemonadeStand
             return days;
         }
 
-        public void MenuReadout()
-        {
-            Console.Clear();
-            // displays day, money, high temp, weather forecast for day
-            Console.WriteLine("Day: " + currentDay + "       Money: " + player.wallet.GetMoney() + "       Weather: " + weather.DailyForecast());
-            
-            Console.WriteLine();
-
-        }
+        
     }
 }

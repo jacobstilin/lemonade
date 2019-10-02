@@ -9,15 +9,13 @@ namespace LemonadeStand
     class Day
     {
         // variables
-        public string condition;
-        public int temperature;
-        public List<string> weatherConditions;
-        public string predictedForecast;
+        public Weather weather;
+        public List<Customer> customers;
 
         // constructor
         public Day()
         {
-
+            weather = new Weather();
         }
 
         // methods

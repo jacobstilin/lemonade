@@ -22,11 +22,17 @@ namespace LemonadeStand
         }
 
         // methods
-        public string DailyForecast()
+        public string DailyForecast(int currentDay)
         {
-            return weatherConditions[monthForeCast[Game.currentDay]];
+            
+            return weatherConditions[monthForeCast[currentDay]];
         }
         
+        public int DailyTemperature()
+        {
+            int temp = rng.Next(40, 100);
+            return temp;
+        }
         public void CreateWeather()
         {
             for (int i = 0; i < 37; i++)

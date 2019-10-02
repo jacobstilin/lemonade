@@ -31,5 +31,36 @@ namespace LemonadeStand
             Console.WriteLine("Ice Cubes: " + iceCubes.Count);
 
         }
+
+        public void AddItems(string item, int quantity)
+        {
+            switch (item)
+            {
+                case "cups":
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        cups.Add(new Cup());
+                    }
+                    break;
+                case "lemons":
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        lemons.Add(new Lemon());
+                    }
+                    break;
+                case "sugar cubes":
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        sugarCubes.Add(new SugarCube());
+                    }
+                    break;
+                case "ice cubes":
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        iceCubes.Add(new IceCube());
+                    }
+                    break;
+            }
+        }
     }
 }
