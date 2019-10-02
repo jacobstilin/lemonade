@@ -16,8 +16,7 @@ namespace LemonadeStand
 
         public Lemon()
         {
-            purchaseDate = Game.currentDay;
-            expirationDate = (purchaseDate + 3);
+            
         }
 
         // methods

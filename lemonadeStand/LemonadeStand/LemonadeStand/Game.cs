@@ -36,14 +36,15 @@ namespace LemonadeStand
             {
                 Store store = new Store(player);
                 store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
-                Console.WriteLine("aow it's the day time");
-                RunDay();
-                Console.ReadLine();
+                RunDay(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
+                
             }
         }
 
-        public void RunDay()
+        public void RunDay(int currentDay, double money, string forecast, int temp)
         {
+            UserInterface.MenuReadout(currentDay, money, forecast, temp);
+            UserInterface.DisplayInventory(player.inventory);
             for (int i = 0; i < 25; i++)
             {
                 if (player.pitcher.CupsInPitcher() == 0)
@@ -63,11 +64,25 @@ namespace LemonadeStand
                 
                 if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay)) == true)
                 {
-                    Console.WriteLine(customer.GetName(i) + " buys!");
+                    
+                    bool enough = player.CreateLemonadeCup(player.recipe.ammountOfIceCubes, player.inventory.iceCubes.Count);
+                    if (enough == true)
+                    {
+                        Console.WriteLine(customer.GetName(i) + " buys!");
+                        player.wallet.GainMoney(player.recipe.pricePerCup);
+                        player.pitcher.SellCups(1);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    
+                    
                 }
             }
             player.inventory.IceMelts();
             player.pitcher.DumpPitcher();
+            Console.WriteLine("Press enter to continue.");
             Console.ReadLine();   
 
         }

@@ -95,8 +95,11 @@ namespace LemonadeStand
 
         public void IceMelts()
         {
-            iceCubes.Clear();
-            Console.WriteLine("All ice cubes melt.");
+            if (iceCubes.Count > 0)
+            {
+                iceCubes.Clear();
+                Console.WriteLine("All ice cubes melt.");
+            }
         }
     }
 }

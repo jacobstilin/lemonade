@@ -41,5 +41,21 @@ namespace LemonadeStand
                 return false;
             }
         }
+
+        public bool CreateLemonadeCup(int iceCubes, int iceCubesInInv)
+        {
+            if (iceCubesInInv >= iceCubes)
+            {
+                inventory.RemoveItems("ice cubes", iceCubes);
+
+
+                    return true;
+            }
+            else
+            {
+                Console.WriteLine("Out of ice cubes");
+                return false;
+            }
+        }
     }
 }

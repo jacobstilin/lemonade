@@ -20,7 +20,7 @@ namespace LemonadeStand
                 "Seymore Banks", "Chimcham Bamma", "Johnny Flan", "Jim Jamb", "Baba Yaga", "Sasha Shaem", "Lance Doozey", "Buster Cripps", "Hugh Jnuthin", "Sarah Micks", "Josh Odoner",
                 "Tron", "Clayton Bigsby", "Arthur Tiller", "Phrank Ocean", "Lionel Sims", "Barbara Waters", "Ahya Stahk", "Jimbo Janus", "Stannis Mannis", "Sword Becher", "Hugo Thattaway",
                 "Ylgo Dissweh", "Moe Shemp", "Pate le PigBwah", "Gerry the Incel", "Susie Bimmer", "Spittoon Spencer", "Tammy Bobammy", "Sir Don Plour", "Chimchim Chimmaram", "Comishna Gordin",
-                "Kevin Boston", "Vinny Deleo", "Alny Palmy", "Balmy Wetha", "Aria Sirius", "Lexus Texas", "Howland Reed", "Kenya Reed", "Cletus Bananas",  };
+                "Kevin Boston", "Vinny Deleo", "Alny Palmy", "Balmy Wetha", "Aria Sirius", "Lexus Texas", "Howland Reed", "Kenya Reed", "Cletus Bananas", "Kuvern Macaque" };
 
             
         }
@@ -34,10 +34,9 @@ namespace LemonadeStand
 
         public bool ChanceToBuy(int weather, int temp)
         {
-            int lowEnd = temp;
-            int highEnd = (100 + weather);
-            int chance = rng.Next(lowEnd, highEnd);
-            if (chance == 100)
+            
+            int chance = rng.Next(1, 5);
+            if (chance == 3)
             {
                 return true;
             }
