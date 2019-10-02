@@ -14,13 +14,28 @@ namespace LemonadeStand
         // constructor
         public Pitcher()
         {
-            cupsLeftInPitcher = 12;
+            cupsLeftInPitcher = 0;
         }
 
         // methods
         public void SellCups(int cupsSold)
         {
             cupsLeftInPitcher -= cupsSold;
+        }
+
+        public void FillPitcher()
+        {
+            cupsLeftInPitcher = 12;
+        }
+        public int CupsInPitcher()
+        {
+            return cupsLeftInPitcher;
+        }
+
+        public void DumpPitcher()
+        {
+            cupsLeftInPitcher = 0;
+            Console.WriteLine("Pitcher dumped at end of day.");
         }
     }
 }

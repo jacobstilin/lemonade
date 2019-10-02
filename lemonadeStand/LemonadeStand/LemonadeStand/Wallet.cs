@@ -14,13 +14,18 @@ namespace LemonadeStand
         // constructor
         public Wallet()
         {
-            money = 20.00;
+            money = 2.00;
         }
 
         // methods
-        public void GainLoseMoney(double gains)
+        public void GainMoney(double gains)
         {
             money += gains;
+        }
+
+        public void LoseMoney(double losses)
+        {
+            money -= losses;
         }
 
         public double GetMoney()

@@ -58,16 +58,16 @@ namespace LemonadeStand
             switch (choice)
             {
                 case "cups":
-                    player.wallet.GainLoseMoney(BuyCups(money));
+                    player.wallet.LoseMoney(BuyCups(money));
                     break;
                 case "lemons":
-                    player.wallet.GainLoseMoney(BuyLemons(money));
+                    player.wallet.LoseMoney(BuyLemons(money));
                     break;
                 case "sugar cubes":
-                    player.wallet.GainLoseMoney(BuySugarCubes(money));
+                    player.wallet.LoseMoney(BuySugarCubes(money));
                     break;
                 case "ice cubes":
-                    player.wallet.GainLoseMoney(BuyIceCubes(money));
+                    player.wallet.LoseMoney(BuyIceCubes(money));
                     break;
                 case "go back":
                     break;
@@ -77,111 +77,223 @@ namespace LemonadeStand
 
         public double BuyCups(double money)
         {
+            int price;
             Console.WriteLine("Buy small, medium, large pack or none?");
             string choice = Console.ReadLine();
             switch (choice)
             {
                 case "small":
-                    money = -1;
-                    player.inventory.AddItems("cups", 10);
+                    price = 1;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("cups", 10);
+                    }
                     break;
                 case "medium":
-                    money = -2;
-                    player.inventory.AddItems("cups", 20);
+                    price = 2;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("cups", 20);
+                    }
                     break;
                 case "large":
-                    money = -3;
-                    player.inventory.AddItems("cups", 30);
+                    price = 3;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("cups", 30);
+                    }
                     break;
                 case "none":
-                    money = 0;
+                    price = 0;
                     break;
                 default:
-                    money = 0;
+                    price = 0;
                     break;
             }
-            return money;
+            return price;
         }
         public double BuyLemons(double money)
         {
+            int price;
             Console.WriteLine("Buy small, medium, large bag or none?");
             string choice = Console.ReadLine();
             switch (choice)
             {
                 case "small":
-                    money = -1;
-                    player.inventory.AddItems("lemons", 10);
+                    price = 1;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("lemons", 10);
+                    }
                     break;
                 case "medium":
-                    money = -2;
-                    player.inventory.AddItems("lemons", 20);
+                    price = 2;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("lemons", 20);
+                    }
                     break;
                 case "large":
-                    money = -3;
-                    player.inventory.AddItems("lemons", 30);
+                    price = 3;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("lemons", 30);
+                    }
                     break;
                 case "none":
-                    money = 0;
+                    price = 0;
                     break;
                 default:
-                    money = 0;
+                    price = 0;
                     break;
             }
-            return money;
+            return price;
         }
         public double BuySugarCubes(double money)
         {
+            int price;
             Console.WriteLine("Buy small, medium, large box or none?");
             string choice = Console.ReadLine();
             switch (choice)
             {
                 case "small":
-                    money = -1;
-                    player.inventory.AddItems("sugar cubes", 10);
+                    price = 1;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("sugar cubes", 10);
+                    }
                     break;
                 case "medium":
-                    money = -2;
-                    player.inventory.AddItems("sugar cubes", 20);
+                    price = 2;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("sugar cubes", 20);
+                    }
                     break;
                 case "large":
-                    money = -3;
-                    player.inventory.AddItems("sugar cubes", 30);
+                    price = 3;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("sugar cubes", 30);
+                    }
                     break;
                 case "none":
-                    money = 0;
+                    price = 0;
                     break;
                 default:
-                    money = 0;
+                    price = 0;
                     break;
             }
-            return money;
+            return price;
         }
         public double BuyIceCubes(double money)
         {
+            int price;
             Console.WriteLine("Buy small, medium, large bag or none?");
             string choice = Console.ReadLine();
             switch (choice)
             {
                 case "small":
-                    money = -1;
-                    player.inventory.AddItems("ice cubes", 10);
+                    price = 1;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("ice cubes", 10);
+                    }
                     break;
                 case "medium":
-                    money = -2;
-                    player.inventory.AddItems("ice cubes", 20);
+                    price = 2;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("ice cubes", 20);
+                    }
                     break;
                 case "large":
-                    money = -3;
-                    player.inventory.AddItems("ice cubes", 30);
+                    price = 3;
+                    if (price > money)
+                    {
+                        price = 0;
+                        Console.WriteLine("Insufficient funds");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        player.inventory.AddItems("ice cubes", 30);
+                    }
                     break;
                 case "none":
-                    money = 0;
+                    price = 0;
                     break;
                 default:
-                    money = 0;
+                    price = 0;
                     break;
             }
-            return money;
+            return price;
         }
 
         public void QualityControl(int currentDay, double money, string forecast, int temp)

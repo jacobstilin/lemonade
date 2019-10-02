@@ -62,5 +62,41 @@ namespace LemonadeStand
                     break;
             }
         }
+        public void RemoveItems(string item, int quantity)
+        {
+            switch (item)
+            {
+                case "cups":
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        cups.RemoveAt(0);
+                    }
+                    break;
+                case "lemons":
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        lemons.RemoveAt(0);
+                    }
+                    break;
+                case "sugar cubes":
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        sugarCubes.RemoveAt(0);
+                    }
+                    break;
+                case "ice cubes":
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        iceCubes.RemoveAt(0);
+                    }
+                    break;
+            }
+        }
+
+        public void IceMelts()
+        {
+            iceCubes.Clear();
+            Console.WriteLine("All ice cubes melt.");
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         // variables
         private List<string> names;
-
+        static Random rng = new Random(DateTime.Now.Millisecond);
         private string name;
         // constructor
         public Customer()
@@ -26,6 +26,25 @@ namespace LemonadeStand
         }
 
         // methods
+        public string GetName(int person)
+        {
+            string name = names[person];
+            return name;
+        }
 
+        public bool ChanceToBuy(int weather, int temp)
+        {
+            int lowEnd = temp;
+            int highEnd = (100 + weather);
+            int chance = rng.Next(lowEnd, highEnd);
+            if (chance == 100)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

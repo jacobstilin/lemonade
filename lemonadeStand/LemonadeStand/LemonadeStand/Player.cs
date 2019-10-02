@@ -27,6 +27,19 @@ namespace LemonadeStand
 
         // methods
         
-
+        public bool CreatePitcher(int sugarCubes, int lemons, int sugarCubesInInv, int lemonsInInv)
+        {
+            if (sugarCubesInInv >= sugarCubes && lemonsInInv >= lemons)
+            {
+                inventory.RemoveItems("sugar cubes", sugarCubes);
+                inventory.RemoveItems("lemons", lemons);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Out of ingredients.");
+                return false;
+            }
+        }
     }
 }

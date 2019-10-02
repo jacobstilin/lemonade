@@ -29,18 +29,53 @@ namespace LemonadeStand
             UserInterface.DisplayInstructions();
             totalDays = DaysSelector();
             weather.CreateWeather();
+            weather.CreateTemperature();
             
             
             for (currentDay = 1; currentDay <= totalDays; currentDay++)
             {
                 Store store = new Store(player);
-                store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature());
+                store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
                 Console.WriteLine("aow it's the day time");
+                RunDay();
                 Console.ReadLine();
             }
         }
 
+        public void RunDay()
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                if (player.pitcher.CupsInPitcher() == 0)
+                {
+                    bool enough = player.CreatePitcher(player.recipe.ammountOfSugarCubes, player.recipe.ammountOfLemons, player.inventory.lemons.Count, player.inventory.sugarCubes.Count);
+                    if (enough == true)
+                    {
+                        player.pitcher.FillPitcher();
+                        Console.WriteLine("New pitcher mixed up");
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                Customer customer = new Customer();
+                
+                if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay)) == true)
+                {
+                    Console.WriteLine(customer.GetName(i) + " buys!");
+                }
+            }
+            player.inventory.IceMelts();
+            player.pitcher.DumpPitcher();
+            Console.ReadLine();   
 
+        }
+
+        public void CupPurchased()
+        {
+
+        }
         
         public int DaysSelector() // fix if user just pushes enter
         {

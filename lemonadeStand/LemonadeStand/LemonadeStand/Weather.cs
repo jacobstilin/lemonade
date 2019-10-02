@@ -13,25 +13,40 @@ namespace LemonadeStand
         public int temperature;
         private List<string> weatherConditions;
         public List<int> monthForeCast;
+        public List<int> monthTemperatures;
         public string predictedForecast;
         static Random rng = new Random(DateTime.Now.Millisecond);
         public Weather()
         {
             weatherConditions = new List<string>() { "Partly shitty", "Mostly shitty", "Increasingly shitty", "Shitty", "Overcast with shitty", "Shitty Thunderstorms", "Raining Shitty Cats and Dogs" };
             monthForeCast = new List<int>();
+            monthTemperatures = new List<int>();
         }
 
         // methods
         public string DailyForecast(int currentDay)
         {
             
-            return weatherConditions[monthForeCast[currentDay]];
+            return weatherConditions[monthForeCast[currentDay - 1]];
+        }
+
+        public int DailyForecastNumber(int currentDay)
+        {
+            return monthForeCast[currentDay];
+        }
+
+        public int DailyTemperature(int currentDay)
+        {
+            return monthTemperatures[currentDay];
         }
         
-        public int DailyTemperature()
+        public void CreateTemperature()
         {
-            int temp = rng.Next(40, 100);
-            return temp;
+            for (int i = 0; i < 37; i++)
+            {
+                int temp = rng.Next(40, 100);
+                monthTemperatures.Add(temp);
+            }
         }
         public void CreateWeather()
         {
