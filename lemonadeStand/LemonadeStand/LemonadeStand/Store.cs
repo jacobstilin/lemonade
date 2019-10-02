@@ -77,7 +77,7 @@ namespace LemonadeStand
 
         public double BuyCups(double money)
         {
-            Console.WriteLine("Buy small, medium or large pack?");
+            Console.WriteLine("Buy small, medium, large pack or none?");
             string choice = Console.ReadLine();
             switch (choice)
             {
@@ -93,12 +93,18 @@ namespace LemonadeStand
                     money = -3;
                     player.inventory.AddItems("cups", 30);
                     break;
+                case "none":
+                    money = 0;
+                    break;
+                default:
+                    money = 0;
+                    break;
             }
             return money;
         }
         public double BuyLemons(double money)
         {
-            Console.WriteLine("Buy small, medium or large bag?");
+            Console.WriteLine("Buy small, medium, large bag or none?");
             string choice = Console.ReadLine();
             switch (choice)
             {
@@ -114,12 +120,18 @@ namespace LemonadeStand
                     money = -3;
                     player.inventory.AddItems("lemons", 30);
                     break;
+                case "none":
+                    money = 0;
+                    break;
+                default:
+                    money = 0;
+                    break;
             }
             return money;
         }
         public double BuySugarCubes(double money)
         {
-            Console.WriteLine("Buy small, medium or large box?");
+            Console.WriteLine("Buy small, medium, large box or none?");
             string choice = Console.ReadLine();
             switch (choice)
             {
@@ -135,12 +147,18 @@ namespace LemonadeStand
                     money = -3;
                     player.inventory.AddItems("sugar cubes", 30);
                     break;
+                case "none":
+                    money = 0;
+                    break;
+                default:
+                    money = 0;
+                    break;
             }
             return money;
         }
         public double BuyIceCubes(double money)
         {
-            Console.WriteLine("Buy small, medium or large bag?");
+            Console.WriteLine("Buy small, medium, large bag or none?");
             string choice = Console.ReadLine();
             switch (choice)
             {
@@ -155,6 +173,12 @@ namespace LemonadeStand
                 case "large":
                     money = -3;
                     player.inventory.AddItems("ice cubes", 30);
+                    break;
+                case "none":
+                    money = 0;
+                    break;
+                default:
+                    money = 0;
                     break;
             }
             return money;
