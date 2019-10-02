@@ -21,7 +21,7 @@ namespace LemonadeStand
         // methods
         
 
-        public void PurchasingMenu(int currentDay, double money, string forecast, int temp)
+        public bool PurchasingMenu(int currentDay, double money, string forecast, int temp)
         {
             Console.Clear();
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
@@ -38,7 +38,7 @@ namespace LemonadeStand
                     PurchasingMenu(currentDay, money, forecast, temp);
                     break;
                 case "bankrupt":
-                    break;
+                    return true;
                 case "proceed":
                     QualityControl(currentDay, money, forecast, temp);
                     break;
@@ -46,6 +46,7 @@ namespace LemonadeStand
                     PurchasingMenu(currentDay, money, forecast, temp);
                     break;
             }
+            return false;
         }
 
         public void Purchasing(int currentDay, double money, string forecast, int temp)

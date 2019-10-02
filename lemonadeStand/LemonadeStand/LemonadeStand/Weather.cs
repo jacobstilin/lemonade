@@ -55,31 +55,31 @@ namespace LemonadeStand
                 int randomNumber = rng.Next(1, 100);
                 if (randomNumber < 20)
                 {
-                    monthForeCast.Add(1);
+                    monthForeCast.Add(0);
                 }
                 if (randomNumber < 40 && randomNumber > 19)
                 {
-                    monthForeCast.Add(2);
+                    monthForeCast.Add(1);
                 }
                 if (randomNumber < 60 && randomNumber > 39)
                 {
-                    monthForeCast.Add(3);
+                    monthForeCast.Add(2);
                 }
                 if (randomNumber < 80 && randomNumber > 59)
                 {
-                    monthForeCast.Add(4);
+                    monthForeCast.Add(3);
                 }
                 if (randomNumber < 95 && randomNumber > 79)
                 {
-                    monthForeCast.Add(5);
+                    monthForeCast.Add(4);
                 }
                 if (randomNumber < 98 && randomNumber > 94)
                 {
-                    monthForeCast.Add(6);
+                    monthForeCast.Add(5);
                 }
                 if (randomNumber < 100 && randomNumber > 97)
                 {
-                    monthForeCast.Add(7);
+                    monthForeCast.Add(6);
                 }
             }
         }

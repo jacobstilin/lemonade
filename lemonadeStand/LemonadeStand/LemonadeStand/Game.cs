@@ -14,11 +14,14 @@ namespace LemonadeStand
         Weather weather = new Weather();
         public static int currentDay;
         public int totalDays;
+        public double finalMoney;
+        public double bankruptGains;
         
         // constructor
         public Game()
         {
             currentDay = 1;
+            
         }
 
         // methods
@@ -35,10 +38,17 @@ namespace LemonadeStand
             for (currentDay = 1; currentDay <= totalDays; currentDay++)
             {
                 Store store = new Store(player);
-                store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
+                bool bankrupt = store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
+                if (bankrupt == true)
+                {
+                    bankruptGains = Bankrupt(player.wallet.GetMoney(), player.inventory.lemons.Count, player.inventory.sugarCubes.Count);
+                    break;
+                }
                 RunDay(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
                 
             }
+            finalMoney = player.wallet.GetMoney();
+            Console.WriteLine("Your final money is $" + (bankruptGains + finalMoney));
         }
 
         public void RunDay(int currentDay, double money, string forecast, int temp)
@@ -86,20 +96,44 @@ namespace LemonadeStand
             Console.ReadLine();   
 
         }
-
+        public double Bankrupt(double money, int lemons, int sugarCubes)
+        {
+            double lemonsPayout = (lemons * .01);
+            double sugarCubesPayout = (sugarCubes * .01);
+            
+                Console.WriteLine("You have elected to file for bankruptcy. Creditors are on their way...");
+                Console.WriteLine("You receive $" + lemonsPayout + " for your remaining lemons.");
+                Console.WriteLine("You receive $" + sugarCubesPayout + " for your remaining sugar cubes.");
+                Console.WriteLine("Ya mother gives you $7 because she feels bad");
+                double finalMoney = (lemonsPayout + sugarCubesPayout + 7);
+                Console.WriteLine();
+            return finalMoney;
+            
+            
+        }
         public void CupPurchased()
         {
-
+            
         }
         
         public int DaysSelector() // fix if user just pushes enter
         {
-            Console.Clear();
+            
             int days = 1;
+
+            Console.WriteLine("How many days will this game last? Please enter a number between 7 and 30.");
             do
             {
-                Console.WriteLine("How many days will this game last? Please enter a number between 7 and 30.");
-                days = Int32.Parse(Console.ReadLine());
+                
+                
+                string result = Console.ReadLine();
+                while(!Int32.TryParse(result, out days))
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please enter a valid number between 7 and 30.");
+                    result = Console.ReadLine();
+                }
+                days = Int32.Parse(result);
 
                 if (days < 7 || days > 30)
                 {
