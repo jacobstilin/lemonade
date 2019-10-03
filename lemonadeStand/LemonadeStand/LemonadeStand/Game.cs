@@ -51,14 +51,15 @@ namespace LemonadeStand
                 
             }
             finalMoney = player.wallet.GetMoney();
-            Console.WriteLine("Your final money is $" + (bankruptGains + finalMoney));
+            UserInterface.FinalMoney(bankruptGains, finalMoney);
         }
 
         public void RunDay(int currentDay, double money, string forecast, int temp)
         {
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
             UserInterface.DisplayInventory(player.inventory);
-            for (int i = 0; i < 25; i++)
+            Customer customer = new Customer();
+            for (int i = 0; i < customer.names.Count; i++)
             {
                 if (player.pitcher.CupsInPitcher() == 0)
                 {
@@ -73,7 +74,7 @@ namespace LemonadeStand
                         break;
                     }
                 }
-                Customer customer = new Customer();
+                
                 double customerWhim = rng.Next(1, 5);
 
                 if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay), customerWhim) == true)
@@ -93,8 +94,6 @@ namespace LemonadeStand
                     {
                         break;
                     }
-                    
-                    
                 }
             }
             double endMoney = player.wallet.GetMoney();
@@ -102,40 +101,27 @@ namespace LemonadeStand
             player.wallet.GetTotalGains();
             player.inventory.IceMelts();
             player.pitcher.DumpPitcher();
+            player.inventory.LemonsExpire(currentDay);
             Console.WriteLine("Press enter to continue.");
             Console.ReadLine();   
-
         }
+
         public double Bankrupt(double money, int lemons, int sugarCubes)
         {
             double lemonsPayout = (lemons * .01);
             double sugarCubesPayout = (sugarCubes * .01);
+            double finalMoney = (lemonsPayout + sugarCubesPayout + 7);
             
-                Console.WriteLine("You have elected to file for bankruptcy. Creditors are on their way...");
-                Console.WriteLine("You receive $" + lemonsPayout + " for your remaining lemons.");
-                Console.WriteLine("You receive $" + sugarCubesPayout + " for your remaining sugar cubes.");
-                Console.WriteLine("Ya mother gives you $7 because she feels bad");
-                double finalMoney = (lemonsPayout + sugarCubesPayout + 7);
-                Console.WriteLine();
+            UserInterface.Bankrupt(lemonsPayout, sugarCubesPayout);
             return finalMoney;
-            
-            
-        }
-        public void CupPurchased()
-        {
-            
         }
         
         public int DaysSelector() // fix if user just pushes enter
         {
-            
             int days = 1;
-
             Console.WriteLine("How many days will this game last? Please enter a number between 7 and 30.");
             do
             {
-                
-                
                 string result = Console.ReadLine();
                 while(!Int32.TryParse(result, out days))
                 {
@@ -151,6 +137,7 @@ namespace LemonadeStand
                     Console.WriteLine("Please enter a valid number between 7 and 30.");
                 }
             } while (days < 7 || days > 30);
+
             Console.WriteLine("This game will last " + days + " days.");
             Console.WriteLine("Press Enter to proceed.");
             Console.ReadLine();

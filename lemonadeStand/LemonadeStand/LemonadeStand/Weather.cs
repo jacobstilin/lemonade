@@ -75,27 +75,27 @@ namespace LemonadeStand
                 {
                     monthForeCast.Add(0);
                 }
-                if (randomNumber < 40 && randomNumber > 19)
+                else if (randomNumber < 40 && randomNumber > 19)
                 {
                     monthForeCast.Add(1);
                 }
-                if (randomNumber < 60 && randomNumber > 39)
+                else if (randomNumber < 60 && randomNumber > 39)
                 {
                     monthForeCast.Add(2);
                 }
-                if (randomNumber < 80 && randomNumber > 59)
+                else if (randomNumber < 80 && randomNumber > 59)
                 {
                     monthForeCast.Add(3);
                 }
-                if (randomNumber < 95 && randomNumber > 79)
+                else if (randomNumber < 95 && randomNumber > 79)
                 {
                     monthForeCast.Add(4);
                 }
-                if (randomNumber < 98 && randomNumber > 94)
+                else if (randomNumber < 98 && randomNumber > 94)
                 {
                     monthForeCast.Add(5);
                 }
-                if (randomNumber < 100 && randomNumber > 97)
+                else if (randomNumber < 100 && randomNumber > 97)
                 {
                     monthForeCast.Add(6);
                 }

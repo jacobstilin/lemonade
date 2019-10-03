@@ -14,9 +14,10 @@ namespace LemonadeStand
         public int purchaseDate;
         public int expirationDate;
 
-        public Lemon()
+        public Lemon(int currentDay)
         {
-            
+            purchaseDate = currentDay;
+            expirationDate = currentDay + 3;
         }
 
         // methods

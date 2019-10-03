@@ -53,5 +53,19 @@ namespace LemonadeStand
             Console.WriteLine("To change recipe, enter 'change'.");
             Console.WriteLine("Enter 'proceed' to start the day");
         }
+
+        public static void FinalMoney(double bankruptGains, double finalMoney)
+        {
+            Console.WriteLine("Your final money is $" + (bankruptGains + finalMoney));
+        }
+
+        public static void Bankrupt(double lemonsPayout, double sugarCubesPayout)
+        {
+            Console.WriteLine("You have elected to file for bankruptcy. Creditors are on their way...");
+            Console.WriteLine("You receive $" + lemonsPayout + " for your remaining lemons.");
+            Console.WriteLine("You receive $" + sugarCubesPayout + " for your remaining sugar cubes.");
+            Console.WriteLine("Ya mother gives you $7 because she feels bad");
+            Console.WriteLine();
+        }
     }
 }

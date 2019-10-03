@@ -39,11 +39,11 @@ namespace LemonadeStand
             {
                 Console.WriteLine("Made a profit of $" + (endMoney - startMoney) + " today.");
             }
-            if (startMoney > endMoney)
+            else if (startMoney > endMoney)
             {
                 Console.WriteLine("Lost $" + (startMoney - endMoney) + " today.");
             }
-            if (startMoney == endMoney)
+            else if (startMoney == endMoney)
             {
                 Console.WriteLine("Broke even today.");
             }
@@ -57,11 +57,11 @@ namespace LemonadeStand
             {
                 Console.WriteLine("As of today you have made $" + (currentMoney - 20));
             }
-            if (currentMoney < 20)
+            else if (currentMoney < 20)
             {
                 Console.WriteLine("As of today you have lost $" + (20 - currentMoney));
             }
-            if (currentMoney == 20)
+            else if (currentMoney == 20)
             {
                 Console.WriteLine("As of today you are breaking even");
             }

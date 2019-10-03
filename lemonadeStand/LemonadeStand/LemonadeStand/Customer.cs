@@ -9,7 +9,7 @@ namespace LemonadeStand
     class Customer
     {
         // variables
-        private List<string> names;
+        public List<string> names;
         static Random rng = new Random(DateTime.Now.Millisecond);
         private string name;
         public double satisfaction;
@@ -45,15 +45,15 @@ namespace LemonadeStand
             {
                 tempMultiplier = 1.2;
             }
-            if (temp > 70 && temp <= 85)
+            else if (temp > 70 && temp <= 85)
             {
                 tempMultiplier = 1.1;
             }
-            if (temp > 55 && temp <= 70)
+            else if (temp > 55 && temp <= 70)
             {
                 tempMultiplier = 0.9;
             }
-            if (temp > 40 && temp <= 55)
+            else if (temp > 40 && temp <= 55)
             {
                 tempMultiplier = 0.8;
             }
@@ -62,23 +62,23 @@ namespace LemonadeStand
             {
                 weatherMultiplier = 1.2;
             }
-            if (weather == 1)
+            else if (weather == 1)
             {
                 weatherMultiplier = 1.1;
             }
-            if (weather == 2)
+            else if (weather == 2)
             {
                 weatherMultiplier = 1.0;
             }
-            if (weather == 3)
+            else if (weather == 3)
             {
                 weatherMultiplier = 0.9;
             }
-            if (weather == 4)
+            else if (weather == 4)
             {
                 weatherMultiplier = 0.7;
             }
-            if (weather == 5)
+            else if (weather == 5)
             {
                 weatherMultiplier = 0.2;
             }
@@ -87,7 +87,7 @@ namespace LemonadeStand
             {
                 customerWhim = 1.1;
             }
-            if (whim <= 2)
+            else if (whim <= 2)
             {
                 customerWhim = .9;
             }
@@ -117,6 +117,7 @@ namespace LemonadeStand
             {
                 recipeMultiplier = 0;
             }
+
             if (temp > 70 && iceCubes > 4)
             {
                 iceCubesMultiplier = 1;
@@ -129,12 +130,9 @@ namespace LemonadeStand
             {
                 iceCubesMultiplier = 0;
             }
+
             quality = recipeMultiplier + iceCubesMultiplier;
-
             return quality;
-        }
-
-        
-       
+        } 
     }
 }

@@ -64,16 +64,16 @@ namespace LemonadeStand
             switch (choice)
             {
                 case "cups":
-                    player.wallet.LoseMoney(BuyCups(money));
+                    player.wallet.LoseMoney(BuyCups(money, currentDay));
                     break;
                 case "lemons":
-                    player.wallet.LoseMoney(BuyLemons(money));
+                    player.wallet.LoseMoney(BuyLemons(money, currentDay));
                     break;
                 case "sugar cubes":
-                    player.wallet.LoseMoney(BuySugarCubes(money));
+                    player.wallet.LoseMoney(BuySugarCubes(money, currentDay));
                     break;
                 case "ice cubes":
-                    player.wallet.LoseMoney(BuyIceCubes(money));
+                    player.wallet.LoseMoney(BuyIceCubes(money, currentDay));
                     break;
                 case "go back":
                     break;
@@ -81,7 +81,7 @@ namespace LemonadeStand
             PurchasingMenu(currentDay, player.wallet.GetMoney(), forecast, temp);
         }
 
-        public double BuyCups(double money)  // Open closed principle- code allows easy modification of price and ammount purchased
+        public double BuyCups(double money, int currentDay)  // Open closed principle- code allows easy modification of price and ammount purchased
         {
             int price;
             Console.WriteLine("Buy small, medium, large pack or none?");
@@ -98,7 +98,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("cups", 10);
+                        player.inventory.AddItems("cups", 10, currentDay);
                     }
                     break;
                 case "medium":
@@ -111,7 +111,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("cups", 20);
+                        player.inventory.AddItems("cups", 20, currentDay);
                     }
                     break;
                 case "large":
@@ -124,7 +124,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("cups", 30);
+                        player.inventory.AddItems("cups", 30, currentDay);
                     }
                     break;
                 case "none":
@@ -136,7 +136,7 @@ namespace LemonadeStand
             }
             return price;
         }
-        public double BuyLemons(double money)  // Open closed principle- code allows easy modification of price and ammount purchased
+        public double BuyLemons(double money, int currentDay)  // Open closed principle- code allows easy modification of price and ammount purchased
         {
             int price;
             Console.WriteLine("Buy small, medium, large bag or none?");
@@ -153,7 +153,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("lemons", 10);
+                        player.inventory.AddItems("lemons", 10, currentDay);
                     }
                     break;
                 case "medium":
@@ -166,7 +166,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("lemons", 20);
+                        player.inventory.AddItems("lemons", 20, currentDay);
                     }
                     break;
                 case "large":
@@ -179,7 +179,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("lemons", 30);
+                        player.inventory.AddItems("lemons", 30, currentDay);
                     }
                     break;
                 case "none":
@@ -191,7 +191,7 @@ namespace LemonadeStand
             }
             return price;
         }
-        public double BuySugarCubes(double money)  // Open closed principle- code allows easy modification of price and ammount purchased
+        public double BuySugarCubes(double money, int currentDay)  // Open closed principle- code allows easy modification of price and ammount purchased
         {
             int price;
             Console.WriteLine("Buy small, medium, large box or none?");
@@ -208,7 +208,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("sugar cubes", 10);
+                        player.inventory.AddItems("sugar cubes", 10, currentDay);
                     }
                     break;
                 case "medium":
@@ -221,7 +221,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("sugar cubes", 20);
+                        player.inventory.AddItems("sugar cubes", 20, currentDay);
                     }
                     break;
                 case "large":
@@ -234,7 +234,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("sugar cubes", 30);
+                        player.inventory.AddItems("sugar cubes", 30, currentDay);
                     }
                     break;
                 case "none":
@@ -246,7 +246,7 @@ namespace LemonadeStand
             }
             return price;
         }
-        public double BuyIceCubes(double money)  // Open closed principle- code allows easy modification of price and ammount purchased
+        public double BuyIceCubes(double money, int currentDay)  // Open closed principle- code allows easy modification of price and ammount purchased
         {
             int price;
             Console.WriteLine("Buy small, medium, large bag or none?");
@@ -263,7 +263,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("ice cubes", 10);
+                        player.inventory.AddItems("ice cubes", 10, currentDay);
                     }
                     break;
                 case "medium":
@@ -276,7 +276,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("ice cubes", 20);
+                        player.inventory.AddItems("ice cubes", 20, currentDay);
                     }
                     break;
                 case "large":
@@ -289,7 +289,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("ice cubes", 30);
+                        player.inventory.AddItems("ice cubes", 30, currentDay);
                     }
                     break;
                 case "none":

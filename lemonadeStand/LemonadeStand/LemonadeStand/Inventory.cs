@@ -32,7 +32,7 @@ namespace LemonadeStand
 
         }
 
-        public void AddItems(string item, int quantity)  //single responsibility principle
+        public void AddItems(string item, int quantity, int currentDay)  //single responsibility principle
         {
             switch (item)
             {
@@ -45,7 +45,7 @@ namespace LemonadeStand
                 case "lemons":
                     for (int i = 0; i < quantity; i++)
                     {
-                        lemons.Add(new Lemon());
+                        lemons.Add(new Lemon(currentDay));
                     }
                     break;
                 case "sugar cubes":
@@ -104,11 +104,20 @@ namespace LemonadeStand
 
         public void LemonsExpire(int currentDay)
         {
+            int expiredLemons = 0;
             for (int i = 0; i < lemons.Count; i++)
+            {
                 if (lemons[i].expirationDate == currentDay)
                 {
                     lemons.RemoveAt(i);
+                    expiredLemons++;
+                    i--;
                 }
+            }
+            if (expiredLemons > 0)
+            {
+                Console.WriteLine("You lost " + expiredLemons + " lemons.");
+            }
         }
     }
 }
