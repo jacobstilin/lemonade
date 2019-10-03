@@ -20,7 +20,7 @@ namespace LemonadeStand
         // methods
         public void SellCups(int cupsSold)  //single responsibility principle
         {
-            cupsLeftInPitcher -= cupsSold;
+            cupsLeftInPitcher -= cupsSold;  //open closed- more than one cup could be sold if need be
         }
 
         public void FillPitcher()  //single responsibility principle
@@ -37,5 +37,6 @@ namespace LemonadeStand
             cupsLeftInPitcher = 0;
             Console.WriteLine("Pitcher dumped at end of day.");
         }
+        
     }
 }

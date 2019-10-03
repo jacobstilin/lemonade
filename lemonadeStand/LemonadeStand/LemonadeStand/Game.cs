@@ -18,12 +18,13 @@ namespace LemonadeStand
         public double bankruptGains;
         public double startMoney;
         static Random rng = new Random(DateTime.Now.Millisecond);
+        public double satisfaction;
 
         // constructor
         public Game()
         {
             currentDay = 1;
-            
+            satisfaction = 1;
         }
 
         // methods
@@ -77,18 +78,18 @@ namespace LemonadeStand
                 
                 double customerWhim = rng.Next(1, 5);
 
-                if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay), customerWhim) == true)
+                if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay), customerWhim, satisfaction) == true)
                 {
                     
-                    bool enough = player.CreateLemonadeCup(player.recipe.ammountOfIceCubes, player.inventory.iceCubes.Count);
+                    bool enough = player.CreateLemonadeCup(player.recipe.ammountOfIceCubes, player.inventory.iceCubes.Count, player.inventory.cups.Count);
                     if (enough == true)
                     {
                         Console.WriteLine(customer.GetName(i) + " buys!");
-
-                        
-
                         player.wallet.GainMoney(player.recipe.pricePerCup);
                         player.pitcher.SellCups(1);
+                        customer.ChangeSatisfaction(player.recipe.ammountOfIceCubes, player.recipe.ammountOfLemons, player.recipe.ammountOfSugarCubes, player.recipe.pricePerCup, weather.DailyTemperature(currentDay));
+                        satisfaction = customer.GetSatisfaction();
+                        Console.WriteLine(satisfaction);
                     }
                     else
                     {

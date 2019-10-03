@@ -14,8 +14,6 @@ namespace LemonadeStand
         public Wallet wallet;
         public Recipe recipe;
         public Pitcher pitcher;
-        public double businessProfits;
-
         // constructor
         public Player()
         {
@@ -24,9 +22,6 @@ namespace LemonadeStand
             recipe = new Recipe();
             pitcher = new Pitcher();
         }
-
-        // methods
-        
         public bool CreatePitcher(int sugarCubes, int lemons, int sugarCubesInInv, int lemonsInInv)  //single responsibility principle
         {
             if (sugarCubesInInv >= sugarCubes && lemonsInInv >= lemons)
@@ -42,18 +37,17 @@ namespace LemonadeStand
             }
         }
 
-        public bool CreateLemonadeCup(int iceCubes, int iceCubesInInv)  //single responsibility principle
+        public bool CreateLemonadeCup(int iceCubes, int iceCubesInInv, int cupsInInv)  //single responsibility principle
         {
-            if (iceCubesInInv >= iceCubes)
+            if (iceCubesInInv >= iceCubes && cupsInInv > 0)
             {
                 inventory.RemoveItems("ice cubes", iceCubes);
-
-
-                    return true;
+                inventory.RemoveItems("cups", 1);
+                return true;
             }
             else
             {
-                Console.WriteLine("Out of ice cubes");
+                Console.WriteLine("Not enough materials to sell another cup.");
                 return false;
             }
         }

@@ -309,7 +309,6 @@ namespace LemonadeStand
             UserInterface.DisplayInventory(player.inventory);
             Console.WriteLine();
             player.recipe.RecipeMenu(currentDay, money, forecast, temp, player.inventory);
-            
         }
 
         

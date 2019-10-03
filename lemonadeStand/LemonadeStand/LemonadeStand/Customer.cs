@@ -11,7 +11,6 @@ namespace LemonadeStand
         // variables
         public List<string> names;
         static Random rng = new Random(DateTime.Now.Millisecond);
-        private string name;
         public double satisfaction;
         public double tempMultiplier;
         public double weatherMultiplier;
@@ -26,20 +25,66 @@ namespace LemonadeStand
                 "Tron", "Clayton Bigsby", "Arthur Tiller", "Phrank Ocean", "Lionel Sims", "Barbara Waters", "Ahya Stahk", "Jimbo Janus", "Stannis Mannis", "Sword Becher", "Hugo Thattaway",
                 "Ylgo Dissweh", "Moe Shemp", "Pate le PigBwah", "Gerry the Incel", "Susie Bimmer", "Spittoon Spencer", "Tammy Bobammy", "Sir Don Plour", "Chimchim Chimmaram", "Comishna Gordin",
                 "Kevin Boston", "Vinny Deleo", "Alny Palmy", "Balmy Wetha", "Aria Sirius", "Lexus Texas", "Howland Reed", "Kenya Reed", "Cletus Bananas", "Kuvern Macaque", "Levernius Tucker",
-                "Frankie Carbone"};
+                "Frankie Carbone", "Artie Schwartz", "Gerry McCreary", "Chippy McGuire" };
 
-            
+            satisfactionMultiplier = 1;
             
         }
 
-        // methods
+        public void ChangeSatisfaction(int ice, int lemons, int sugar, double price, int temp)
+        {
+            double change = 0;
+            if (ice < 3 && temp < 70)
+            {
+                change += .005;
+            }
+            else if (ice > 3 && temp > 70)
+            {
+                change += .005;
+            }
+            else
+            {
+                change -= .005;
+            }
+            if (lemons >= 10)
+            {
+                change += .005;
+            }
+            else
+            {
+                change -= .005;
+            }
+            if (sugar >= 6)
+            {
+                change += .005;
+            }
+            else
+            {
+                change -= .005;
+            }
+            if (price <= 1)
+            {
+                change += .005;
+            }
+            else
+            {
+                change -= .005;
+            }
+            satisfactionMultiplier += change;
+        }
+
+        public double GetSatisfaction()
+        {
+            return satisfactionMultiplier;
+        }
+        
         public string GetName(int person)
         {
             string name = names[person];
             return name;
         }
 
-        public bool ChanceToBuy(int weather, int temp, double whim)
+        public bool ChanceToBuy(int weather, int temp, double whim, double satisfaction)
         {
             if (temp > 85)
             {
@@ -93,7 +138,7 @@ namespace LemonadeStand
             }
 
             double chance = rng.Next(1, 100);
-            double modChance = (chance * tempMultiplier * weatherMultiplier * customerWhim);
+            double modChance = (chance * tempMultiplier * weatherMultiplier * customerWhim * satisfaction);
             if (modChance > 50)
             {
                 return true;
