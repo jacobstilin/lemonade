@@ -23,7 +23,7 @@ namespace LemonadeStand
         }
 
         // methods
-        public void DisplayItems()
+        public void DisplayItems()  //single responsibility principle
         {
             Console.WriteLine("Cups: " + cups.Count);
             Console.WriteLine("Lemons: " + lemons.Count);
@@ -32,7 +32,7 @@ namespace LemonadeStand
 
         }
 
-        public void AddItems(string item, int quantity)
+        public void AddItems(string item, int quantity)  //single responsibility principle
         {
             switch (item)
             {
@@ -62,7 +62,7 @@ namespace LemonadeStand
                     break;
             }
         }
-        public void RemoveItems(string item, int quantity)
+        public void RemoveItems(string item, int quantity)  //single responsibility principle
         {
             switch (item)
             {
@@ -93,13 +93,22 @@ namespace LemonadeStand
             }
         }
 
-        public void IceMelts()
+        public void IceMelts()  //single responsibility principle
         {
             if (iceCubes.Count > 0)
             {
                 iceCubes.Clear();
                 Console.WriteLine("All ice cubes melt.");
             }
+        }
+
+        public void LemonsExpire(int currentDay)
+        {
+            for (int i = 0; i < lemons.Count; i++)
+                if (lemons[i].expirationDate == currentDay)
+                {
+                    lemons.RemoveAt(i);
+                }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace LemonadeStand
 
         // methods
         
-        public bool CreatePitcher(int sugarCubes, int lemons, int sugarCubesInInv, int lemonsInInv)
+        public bool CreatePitcher(int sugarCubes, int lemons, int sugarCubesInInv, int lemonsInInv)  //single responsibility principle
         {
             if (sugarCubesInInv >= sugarCubes && lemonsInInv >= lemons)
             {
@@ -42,7 +42,7 @@ namespace LemonadeStand
             }
         }
 
-        public bool CreateLemonadeCup(int iceCubes, int iceCubesInInv)
+        public bool CreateLemonadeCup(int iceCubes, int iceCubesInInv)  //single responsibility principle
         {
             if (iceCubesInInv >= iceCubes)
             {

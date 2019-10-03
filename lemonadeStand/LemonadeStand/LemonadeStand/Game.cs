@@ -16,7 +16,9 @@ namespace LemonadeStand
         public int totalDays;
         public double finalMoney;
         public double bankruptGains;
-        
+        public double startMoney;
+        static Random rng = new Random(DateTime.Now.Millisecond);
+
         // constructor
         public Game()
         {
@@ -37,7 +39,8 @@ namespace LemonadeStand
             
             for (currentDay = 1; currentDay <= totalDays; currentDay++)
             {
-                Store store = new Store(player);
+                Store store = new Store(player, weather);
+                startMoney = player.wallet.GetMoney();
                 bool bankrupt = store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
                 if (bankrupt == true)
                 {
@@ -71,14 +74,18 @@ namespace LemonadeStand
                     }
                 }
                 Customer customer = new Customer();
-                
-                if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay)) == true)
+                double customerWhim = rng.Next(1, 5);
+
+                if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay), customerWhim) == true)
                 {
                     
                     bool enough = player.CreateLemonadeCup(player.recipe.ammountOfIceCubes, player.inventory.iceCubes.Count);
                     if (enough == true)
                     {
                         Console.WriteLine(customer.GetName(i) + " buys!");
+
+                        
+
                         player.wallet.GainMoney(player.recipe.pricePerCup);
                         player.pitcher.SellCups(1);
                     }
@@ -90,6 +97,9 @@ namespace LemonadeStand
                     
                 }
             }
+            double endMoney = player.wallet.GetMoney();
+            player.wallet.GetDailyGains(startMoney, endMoney);
+            player.wallet.GetTotalGains();
             player.inventory.IceMelts();
             player.pitcher.DumpPitcher();
             Console.WriteLine("Press enter to continue.");

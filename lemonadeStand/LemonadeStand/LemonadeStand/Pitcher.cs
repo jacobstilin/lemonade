@@ -18,21 +18,21 @@ namespace LemonadeStand
         }
 
         // methods
-        public void SellCups(int cupsSold)
+        public void SellCups(int cupsSold)  //single responsibility principle
         {
             cupsLeftInPitcher -= cupsSold;
         }
 
-        public void FillPitcher()
+        public void FillPitcher()  //single responsibility principle
         {
             cupsLeftInPitcher = 12;
         }
-        public int CupsInPitcher()
+        public int CupsInPitcher()  //single responsibility principle
         {
             return cupsLeftInPitcher;
         }
 
-        public void DumpPitcher()
+        public void DumpPitcher()  //single responsibility principle
         {
             cupsLeftInPitcher = 0;
             Console.WriteLine("Pitcher dumped at end of day.");

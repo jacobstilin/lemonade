@@ -10,12 +10,13 @@ namespace LemonadeStand
     {
         // variable
         Player player;
-        
+        Weather weather;
+
         // constructor
-        public Store(Player player)
+        public Store(Player player, Weather weather)
         {
             this.player = player;
-            
+            this.weather = weather;
         }
 
         // methods
@@ -26,7 +27,7 @@ namespace LemonadeStand
             Console.Clear();
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
             UserInterface.DisplayInventory(player.inventory);
-            Console.WriteLine("Enter 'purchase', 'help', 'bankrupt' or 'proceed'");
+            Console.WriteLine("Enter 'purchase', 'help', 'bankrupt', 'forecast' or 'proceed'");
             string choice = Console.ReadLine();
             switch (choice)
             {
@@ -39,6 +40,10 @@ namespace LemonadeStand
                     break;
                 case "bankrupt":
                     return true;
+                case "forecast":
+                    weather.SevenDayForecast(currentDay);
+                    PurchasingMenu(currentDay, money, forecast, temp);
+                    break;
                 case "proceed":
                     QualityControl(currentDay, money, forecast, temp);
                     break;
@@ -49,7 +54,7 @@ namespace LemonadeStand
             return false;
         }
 
-        public void Purchasing(int currentDay, double money, string forecast, int temp)
+        public void Purchasing(int currentDay, double money, string forecast, int temp)  // Open closed principle- code allows for more items to be added to store
         {
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
             UserInterface.DisplayInventory(player.inventory);
@@ -76,7 +81,7 @@ namespace LemonadeStand
             PurchasingMenu(currentDay, player.wallet.GetMoney(), forecast, temp);
         }
 
-        public double BuyCups(double money)
+        public double BuyCups(double money)  // Open closed principle- code allows easy modification of price and ammount purchased
         {
             int price;
             Console.WriteLine("Buy small, medium, large pack or none?");
@@ -131,7 +136,7 @@ namespace LemonadeStand
             }
             return price;
         }
-        public double BuyLemons(double money)
+        public double BuyLemons(double money)  // Open closed principle- code allows easy modification of price and ammount purchased
         {
             int price;
             Console.WriteLine("Buy small, medium, large bag or none?");
@@ -186,7 +191,7 @@ namespace LemonadeStand
             }
             return price;
         }
-        public double BuySugarCubes(double money)
+        public double BuySugarCubes(double money)  // Open closed principle- code allows easy modification of price and ammount purchased
         {
             int price;
             Console.WriteLine("Buy small, medium, large box or none?");
@@ -241,7 +246,7 @@ namespace LemonadeStand
             }
             return price;
         }
-        public double BuyIceCubes(double money)
+        public double BuyIceCubes(double money)  // Open closed principle- code allows easy modification of price and ammount purchased
         {
             int price;
             Console.WriteLine("Buy small, medium, large bag or none?");
