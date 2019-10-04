@@ -11,10 +11,12 @@ namespace LemonadeStand
         // variables
         public Weather weather;
         public List<Customer> customers;
+        Random rng;
 
         // constructor
-        public Day()
+        public Day(Random rng)
         {
+            this.rng = rng;
             customers = new List<Customer>();
             weather = new Weather();
             CreateCustomer();
@@ -28,7 +30,7 @@ namespace LemonadeStand
             int dailyCustomers = new Random().Next(50, 100);
             for (int i = 0; i < dailyCustomers; i++)
             {
-                Customer customer = new Customer();
+                Customer customer = new Customer(rng);
                 customers.Add(customer);
 
             }

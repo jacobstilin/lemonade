@@ -23,6 +23,8 @@ namespace LemonadeStand
             pitcher = new Pitcher();
         }
 
+
+
         public bool PitcherCheck()
         {
             if (pitcher.CupsInPitcher() == 0)

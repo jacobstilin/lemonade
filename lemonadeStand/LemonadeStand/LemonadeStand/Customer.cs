@@ -11,15 +11,16 @@ namespace LemonadeStand
         // variables
         public List<string> names;
         public string name;
-        static Random rng = new Random(DateTime.Now.Millisecond);
-        public double satisfaction;
+        private Random rng;
+        
         public double tempMultiplier;
         public double weatherMultiplier;
         public double satisfactionMultiplier;
         public double customerWhim;
         // constructor
-        public Customer()
+        public Customer(Random rng)
         {
+            this.rng = rng;
             names = new List<string>() { "Juan Rombaldi", "Jason JavirSchmidt", "Ash Jager", "Zofia Montagne", "Mustachio Joans", "Pistachio Pete", "Dirk the Clerk", "Chimmy Sweeps",
                 "Cotter Putin", "Mona Simpson", "Moe Anna", "Eggy Mule", "Shorty Boyd", "Dennis Cutty", "Blake Donny", "Ichobad Crane", "Sonny Day", "Revolver Ocelot", "Mugsy Boags",
                 "Seymore Banks", "Chimcham Bamma", "Johnny Flan", "Jim Jamb", "Baba Yaga", "Sasha Shaem", "Lance Doozey", "Buster Cripps", "Hugh Jnuthin", "Sarah Micks", "Josh Odoner",
@@ -36,59 +37,11 @@ namespace LemonadeStand
 
         private void SetName()
         {
-            name = names[new Random().Next(names.Count - 1)];
+            name = names[rng.Next(names.Count - 1)];
         }
 
-        public void ChangeSatisfaction(int ice, int lemons, int sugar, double price, int temp)
-        {
-            double change = 0;
-            if (ice < 3 && temp < 70)
-            {
-                change += .005;
-            }
-            else if (ice > 3 && temp > 70)
-            {
-                change += .005;
-            }
-            else
-            {
-                change -= .01;
-            }
-            if (lemons >= 10)
-            {
-                change += .005;
-            }
-            else
-            {
-                change -= .005;
-            }
-            if (sugar >= 6)
-            {
-                change += .005;
-            }
-            else
-            {
-                change -= .005;
-            }
-            if (price == 0)
-            {
-                change += .02;
-            }
-            if (price <= 1 && price > 0)
-            {
-                change += .005;
-            }
-            else
-            {
-                change -= .005;
-            }
-            satisfactionMultiplier += change;
-        }
 
-        public double GetSatisfaction()
-        {
-            return satisfactionMultiplier;
-        }
+        
         
         public string GetName(int person)
         {
@@ -96,7 +49,7 @@ namespace LemonadeStand
             return name;
         }
 
-        public bool ChanceToBuy(int weather, int temp)
+        public bool ChanceToBuy(int weather, int temp, double satisfaction)
         {
             if (temp > 85)
             {

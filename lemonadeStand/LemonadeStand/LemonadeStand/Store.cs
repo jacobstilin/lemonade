@@ -27,7 +27,7 @@ namespace LemonadeStand
             Console.Clear();
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
             UserInterface.DisplayInventory(player.inventory);
-            Console.WriteLine("Enter 'purchase', 'help', 'bankrupt', 'forecast' or 'proceed'");
+            Console.WriteLine("Enter 'purchase', 'help', 'bankrupt' or 'proceed'");
             string choice = Console.ReadLine();
             switch (choice)
             {

@@ -20,12 +20,14 @@ namespace LemonadeStand
         public double startMoney;
         static Random rng = new Random(DateTime.Now.Millisecond);
         public double satisfaction;
+        public double satisfactionMultiplier;
 
         // constructor
         public Game()
         {
             days = new List<Day>();
             currentDay = 0;
+            satisfaction = 1;
             CreateDay();
             
         }
@@ -51,6 +53,7 @@ namespace LemonadeStand
                     bankruptGains = Bankrupt(player.wallet.GetMoney(), player.inventory.lemons.Count, player.inventory.sugarCubes.Count);
                     break;
                 }
+
                 RunDay(currentDay, player.wallet.GetMoney(), day.weather.condition, day.weather.temperature, day);
                 
             }
@@ -78,8 +81,9 @@ namespace LemonadeStand
                         break;
                     }
                 }
-
-                if (day.customers[i].ChanceToBuy(day.weather.conditionInt, day.weather.temperature) == true)
+                
+                
+                if (day.customers[i].ChanceToBuy(day.weather.conditionInt, day.weather.temperature, satisfaction) == true)
                 {
                     
                     bool enough = player.CreateLemonadeCup(player.recipe.ammountOfIceCubes, player.inventory.iceCubes.Count, player.inventory.cups.Count);
@@ -88,13 +92,12 @@ namespace LemonadeStand
                         Console.WriteLine(day.customers[i].name + " buys!");
                         player.wallet.GainMoney(player.recipe.pricePerCup);
                         player.pitcher.SellCups(1);
-                        day.customers[i].ChangeSatisfaction(player.recipe.ammountOfIceCubes, player.recipe.ammountOfLemons, player.recipe.ammountOfSugarCubes, player.recipe.pricePerCup, day.weather.temperature);
-                        satisfaction = day.customers[i].GetSatisfaction();
+                        ChangeSatisfaction(player.recipe.ammountOfIceCubes, player.recipe.ammountOfLemons, player.recipe.ammountOfSugarCubes, player.recipe.pricePerCup, day.weather.temperature);
+                        Console.WriteLine(satisfaction);
                     }
                     else
                     {
                         Console.ReadLine();
-                           
                         break;
                     }
                 }
@@ -114,7 +117,7 @@ namespace LemonadeStand
         {
             for (int i = 0; i < 37; i++)
             {
-                Day day = new Day();
+                Day day = new Day(rng);
                 days.Add(day);
             }
         }
@@ -180,5 +183,53 @@ namespace LemonadeStand
                 }
             }
         }
+
+        public void ChangeSatisfaction(int ice, int lemons, int sugar, double price, int temp)
+        {
+            double change = 0;
+            if (ice < 3 && temp < 70)
+            {
+                change += .005;
+            }
+            else if (ice > 3 && temp > 70)
+            {
+                change += .005;
+            }
+            else
+            {
+                change -= .01;
+            }
+            if (lemons >= 10)
+            {
+                change += .005;
+            }
+            else
+            {
+                change -= .005;
+            }
+            if (sugar >= 6)
+            {
+                change += .005;
+            }
+            else
+            {
+                change -= .005;
+            }
+            if (price == 0)
+            {
+                change += .02;
+            }
+            if (price <= 1 && price > 0)
+            {
+                change += .005;
+            }
+            else
+            {
+                change -= .005;
+            }
+            satisfaction += change;
+        }
+        
     }
+
 }

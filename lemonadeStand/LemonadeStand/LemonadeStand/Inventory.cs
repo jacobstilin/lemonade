@@ -20,6 +20,7 @@ namespace LemonadeStand
             lemons = new List<Lemon>();
             sugarCubes = new List<SugarCube>();
             iceCubes = new List<IceCube>();
+            StarterPack();
         }
 
         // methods
@@ -31,7 +32,25 @@ namespace LemonadeStand
             Console.WriteLine("Ice Cubes: " + iceCubes.Count);
 
         }
-
+        public void StarterPack()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                cups.Add(new Cup());
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                lemons.Add(new Lemon(1));
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                sugarCubes.Add(new SugarCube());
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                iceCubes.Add(new IceCube());
+            }
+        }
         public void AddItems(string item, int quantity, int currentDay)  //single responsibility principle
         {
             switch (item)
