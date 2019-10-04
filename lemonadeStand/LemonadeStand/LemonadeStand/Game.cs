@@ -24,7 +24,8 @@ namespace LemonadeStand
         public Game()
         {
             currentDay = 1;
-            satisfaction = 1;
+            
+            
         }
 
         // methods
@@ -36,30 +37,32 @@ namespace LemonadeStand
             totalDays = DaysSelector();
             weather.CreateWeather();
             weather.CreateTemperature();
-            
-            
+            Customer customer = new Customer();
+
             for (currentDay = 1; currentDay <= totalDays; currentDay++)
             {
                 Store store = new Store(player, weather);
                 startMoney = player.wallet.GetMoney();
+                KickUp(currentDay);
                 bool bankrupt = store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
                 if (bankrupt == true)
                 {
                     bankruptGains = Bankrupt(player.wallet.GetMoney(), player.inventory.lemons.Count, player.inventory.sugarCubes.Count);
                     break;
                 }
-                RunDay(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
+                RunDay(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay), customer);
                 
             }
             finalMoney = player.wallet.GetMoney();
             UserInterface.FinalMoney(bankruptGains, finalMoney);
         }
 
-        public void RunDay(int currentDay, double money, string forecast, int temp)
+        public void RunDay(int currentDay, double money, string forecast, int temp, Customer customer)
         {
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
             UserInterface.DisplayInventory(player.inventory);
-            Customer customer = new Customer();
+            satisfaction = customer.GetSatisfaction();
+
             for (int i = 0; i < customer.names.Count; i++)
             {
                 if (player.pitcher.CupsInPitcher() == 0)
@@ -75,7 +78,7 @@ namespace LemonadeStand
                         break;
                     }
                 }
-                
+
                 double customerWhim = rng.Next(1, 5);
 
                 if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay), customerWhim, satisfaction) == true)
@@ -89,10 +92,11 @@ namespace LemonadeStand
                         player.pitcher.SellCups(1);
                         customer.ChangeSatisfaction(player.recipe.ammountOfIceCubes, player.recipe.ammountOfLemons, player.recipe.ammountOfSugarCubes, player.recipe.pricePerCup, weather.DailyTemperature(currentDay));
                         satisfaction = customer.GetSatisfaction();
-                        Console.WriteLine(satisfaction);
                     }
                     else
                     {
+                        Console.ReadLine();
+                           
                         break;
                     }
                 }
@@ -119,6 +123,7 @@ namespace LemonadeStand
         
         public int DaysSelector() // fix if user just pushes enter
         {
+            Console.Clear();
             int days = 1;
             Console.WriteLine("How many days will this game last? Please enter a number between 7 and 30.");
             do
@@ -145,6 +150,25 @@ namespace LemonadeStand
             return days;
         }
 
-        
+        public void KickUp(int day)
+        {
+            if (day % 7 == 1 && day != 1)
+            {
+                double cash = player.wallet.GetMoney();
+                if (cash >= 5)
+                {
+                    player.wallet.LoseMoney(5);
+                    Console.WriteLine("You kick up $5 to your crew chief.");
+                    Console.ReadLine();
+                }
+                else if (cash < 5)
+                {
+                    Console.WriteLine("You don't have enough to kick up this week and get your ass kicked");
+                    Console.WriteLine("Next time there won't be a next time.");
+                    Console.WriteLine("Press enter to proceed.");
+                    Console.ReadLine();
+                }
+            }
+        }
     }
 }

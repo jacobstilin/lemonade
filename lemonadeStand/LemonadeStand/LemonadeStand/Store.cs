@@ -111,7 +111,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("cups", 20, currentDay);
+                        player.inventory.AddItems("cups", 25, currentDay);
                     }
                     break;
                 case "large":
@@ -124,7 +124,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("cups", 30, currentDay);
+                        player.inventory.AddItems("cups", 40, currentDay);
                     }
                     break;
                 case "none":
@@ -166,7 +166,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("lemons", 20, currentDay);
+                        player.inventory.AddItems("lemons", 22, currentDay);
                     }
                     break;
                 case "large":
@@ -179,7 +179,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("lemons", 30, currentDay);
+                        player.inventory.AddItems("lemons", 35, currentDay);
                     }
                     break;
                 case "none":
@@ -221,7 +221,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("sugar cubes", 20, currentDay);
+                        player.inventory.AddItems("sugar cubes", 22, currentDay);
                     }
                     break;
                 case "large":
@@ -234,7 +234,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("sugar cubes", 30, currentDay);
+                        player.inventory.AddItems("sugar cubes", 35, currentDay);
                     }
                     break;
                 case "none":
@@ -276,7 +276,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("ice cubes", 20, currentDay);
+                        player.inventory.AddItems("ice cubes", 25, currentDay);
                     }
                     break;
                 case "large":
@@ -289,7 +289,7 @@ namespace LemonadeStand
                     }
                     else
                     {
-                        player.inventory.AddItems("ice cubes", 30, currentDay);
+                        player.inventory.AddItems("ice cubes", 50, currentDay);
                     }
                     break;
                 case "none":

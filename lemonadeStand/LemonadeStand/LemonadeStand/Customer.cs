@@ -44,7 +44,7 @@ namespace LemonadeStand
             }
             else
             {
-                change -= .005;
+                change -= .01;
             }
             if (lemons >= 10)
             {
@@ -62,7 +62,11 @@ namespace LemonadeStand
             {
                 change -= .005;
             }
-            if (price <= 1)
+            if (price == 0)
+            {
+                change += .02;
+            }
+            if (price <= 1 && price > 0)
             {
                 change += .005;
             }

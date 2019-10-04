@@ -22,7 +22,19 @@ namespace LemonadeStand
         public static void DisplayInstructions()
         {
             Console.Clear();
-            Console.WriteLine("Here is some rules for you to follow");
+            Console.WriteLine("Now that you are nine years old, you have been given the corner of 5th and Maple to move lemonade.");
+            Console.WriteLine("All you have to worry about now is kicking up five dollars to your crew chief once a week. To run");
+            Console.WriteLine("a profitable lemonade stand, you must sell a lot of lemonade while keeping overhead down. Before");
+            Console.WriteLine("you set up shop each day, stop by the store to re-up on supplies. Stay stocked with enough lemons,");
+            Console.WriteLine("sugar cubes, cups and ice to make it though the day. Remember, ice melts at the end of each day,");
+            Console.WriteLine("lemons go bad after three days and you have to dump out the lemonade you don't sell at the end of");
+            Console.WriteLine("the day. Check the weather and temperature each day and adjust your pricing and recipe accordingly.");
+            Console.WriteLine("Keep customers happy with cheap, sugary and lemony lemonade. On a hot day, use ice! You can also");
+            Console.WriteLine("check the seven day forecast for an idea of what is to come. If you sell good product, customers");
+            Console.WriteLine("will be more likely to buy, so it may be prudent to put out testers the first few days.");
+            Console.WriteLine();
+            Console.WriteLine("Good luck!");
+            Console.WriteLine();
             Console.WriteLine("Press Enter to proceed");
             Console.ReadLine();
         }
