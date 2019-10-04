@@ -10,6 +10,7 @@ namespace LemonadeStand
     {
         // variables
         public List<string> names;
+        public string name;
         static Random rng = new Random(DateTime.Now.Millisecond);
         public double satisfaction;
         public double tempMultiplier;
@@ -28,7 +29,14 @@ namespace LemonadeStand
                 "Frankie Carbone", "Artie Schwartz", "Gerry McCreary", "Chippy McGuire" };
 
             satisfactionMultiplier = 1;
-            
+
+            SetName();
+
+        }
+
+        private void SetName()
+        {
+            name = names[new Random().Next(names.Count - 1)];
         }
 
         public void ChangeSatisfaction(int ice, int lemons, int sugar, double price, int temp)
@@ -88,7 +96,7 @@ namespace LemonadeStand
             return name;
         }
 
-        public bool ChanceToBuy(int weather, int temp, double whim, double satisfaction)
+        public bool ChanceToBuy(int weather, int temp)
         {
             if (temp > 85)
             {
@@ -132,17 +140,8 @@ namespace LemonadeStand
                 weatherMultiplier = 0.2;
             }
 
-            if (whim > 2)
-            {
-                customerWhim = 1.1;
-            }
-            else if (whim <= 2)
-            {
-                customerWhim = .9;
-            }
-
             double chance = rng.Next(1, 100);
-            double modChance = (chance * tempMultiplier * weatherMultiplier * customerWhim * satisfaction);
+            double modChance = (chance * tempMultiplier * weatherMultiplier * satisfaction);
             if (modChance > 50)
             {
                 return true;

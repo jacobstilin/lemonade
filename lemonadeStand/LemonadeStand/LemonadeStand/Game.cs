@@ -11,6 +11,7 @@ namespace LemonadeStand
         // variables
         Player player = new Player();
         List<Day> days;
+
         Weather weather = new Weather();
         public static int currentDay;
         public int totalDays;
@@ -23,8 +24,9 @@ namespace LemonadeStand
         // constructor
         public Game()
         {
-            currentDay = 1;
-            
+            days = new List<Day>();
+            currentDay = 0;
+            CreateDay();
             
         }
 
@@ -35,43 +37,41 @@ namespace LemonadeStand
             UserInterface.Introduction();
             UserInterface.DisplayInstructions();
             totalDays = DaysSelector();
-            weather.CreateWeather();
-            weather.CreateTemperature();
-            Customer customer = new Customer();
+            
 
-            for (currentDay = 1; currentDay <= totalDays; currentDay++)
+            for (currentDay = 0; currentDay < totalDays; currentDay++)
             {
                 Store store = new Store(player, weather);
+                Day day = days[currentDay];
                 startMoney = player.wallet.GetMoney();
                 KickUp(currentDay);
-                bool bankrupt = store.PurchasingMenu(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay));
+                bool bankrupt = store.PurchasingMenu(currentDay, player.wallet.GetMoney(), day.weather.condition, day.weather.temperature, day);
                 if (bankrupt == true)
                 {
                     bankruptGains = Bankrupt(player.wallet.GetMoney(), player.inventory.lemons.Count, player.inventory.sugarCubes.Count);
                     break;
                 }
-                RunDay(currentDay, player.wallet.GetMoney(), weather.DailyForecast(currentDay), weather.DailyTemperature(currentDay), customer);
+                RunDay(currentDay, player.wallet.GetMoney(), day.weather.condition, day.weather.temperature, day);
                 
             }
             finalMoney = player.wallet.GetMoney();
             UserInterface.FinalMoney(bankruptGains, finalMoney);
         }
 
-        public void RunDay(int currentDay, double money, string forecast, int temp, Customer customer)
+        public void RunDay(int currentDay, double money, string forecast, int temp, Day day)
         {
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
             UserInterface.DisplayInventory(player.inventory);
-            satisfaction = customer.GetSatisfaction();
+            
 
-            for (int i = 0; i < customer.names.Count; i++)
+            for (int i = 0; i < day.customers.Count; i++)
             {
-                if (player.pitcher.CupsInPitcher() == 0)
+                if (player.PitcherCheck() == true)
                 {
-                    bool enough = player.CreatePitcher(player.recipe.ammountOfSugarCubes, player.recipe.ammountOfLemons, player.inventory.lemons.Count, player.inventory.sugarCubes.Count);
+                    bool enough = player.IngredientsCheck();
                     if (enough == true)
                     {
                         player.pitcher.FillPitcher();
-                        Console.WriteLine("New pitcher mixed up");
                     }
                     else
                     {
@@ -79,19 +79,17 @@ namespace LemonadeStand
                     }
                 }
 
-                double customerWhim = rng.Next(1, 5);
-
-                if (customer.ChanceToBuy(weather.DailyForecastNumber(currentDay), weather.DailyTemperature(currentDay), customerWhim, satisfaction) == true)
+                if (day.customers[i].ChanceToBuy(day.weather.conditionInt, day.weather.temperature) == true)
                 {
                     
                     bool enough = player.CreateLemonadeCup(player.recipe.ammountOfIceCubes, player.inventory.iceCubes.Count, player.inventory.cups.Count);
                     if (enough == true)
                     {
-                        Console.WriteLine(customer.GetName(i) + " buys!");
+                        Console.WriteLine(day.customers[i].name + " buys!");
                         player.wallet.GainMoney(player.recipe.pricePerCup);
                         player.pitcher.SellCups(1);
-                        customer.ChangeSatisfaction(player.recipe.ammountOfIceCubes, player.recipe.ammountOfLemons, player.recipe.ammountOfSugarCubes, player.recipe.pricePerCup, weather.DailyTemperature(currentDay));
-                        satisfaction = customer.GetSatisfaction();
+                        day.customers[i].ChangeSatisfaction(player.recipe.ammountOfIceCubes, player.recipe.ammountOfLemons, player.recipe.ammountOfSugarCubes, player.recipe.pricePerCup, day.weather.temperature);
+                        satisfaction = day.customers[i].GetSatisfaction();
                     }
                     else
                     {
@@ -101,6 +99,7 @@ namespace LemonadeStand
                     }
                 }
             }
+
             double endMoney = player.wallet.GetMoney();
             player.wallet.GetDailyGains(startMoney, endMoney);
             player.wallet.GetTotalGains();
@@ -110,6 +109,17 @@ namespace LemonadeStand
             Console.WriteLine("Press enter to continue.");
             Console.ReadLine();   
         }
+
+        public void CreateDay()
+        {
+            for (int i = 0; i < 37; i++)
+            {
+                Day day = new Day();
+                days.Add(day);
+            }
+        }
+
+
 
         public double Bankrupt(double money, int lemons, int sugarCubes)
         {

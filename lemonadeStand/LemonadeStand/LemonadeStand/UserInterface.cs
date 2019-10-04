@@ -43,7 +43,7 @@ namespace LemonadeStand
         {
             Console.Clear();
             // displays day, money, high temp, weather forecast for day
-            Console.WriteLine("Day: " + currentDay + "       Money: " + money + "       Weather: " + forecast + "       Temperature: " + temp);
+            Console.WriteLine("Day: " + (currentDay + 1) + "       Money: " + money + "       Weather: " + forecast + "       Temperature: " + temp);
 
         }
         public static void DisplayInventory(Inventory inventory)

@@ -22,7 +22,7 @@ namespace LemonadeStand
         // methods
         
 
-        public bool PurchasingMenu(int currentDay, double money, string forecast, int temp)
+        public bool PurchasingMenu(int currentDay, double money, string forecast, int temp, Day day)
         {
             Console.Clear();
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
@@ -32,29 +32,25 @@ namespace LemonadeStand
             switch (choice)
             {
                 case "purchase":
-                    Purchasing(currentDay, money, forecast, temp);
+                    Purchasing(currentDay, money, forecast, temp, day);
                     break;
                 case "help":
                     UserInterface.DisplayInstructions();
-                    PurchasingMenu(currentDay, money, forecast, temp);
+                    PurchasingMenu(currentDay, money, forecast, temp, day);
                     break;
                 case "bankrupt":
                     return true;
-                case "forecast":
-                    weather.SevenDayForecast(currentDay);
-                    PurchasingMenu(currentDay, money, forecast, temp);
-                    break;
                 case "proceed":
                     QualityControl(currentDay, money, forecast, temp);
                     break;
                 default:
-                    PurchasingMenu(currentDay, money, forecast, temp);
+                    PurchasingMenu(currentDay, money, forecast, temp, day);
                     break;
             }
             return false;
         }
 
-        public void Purchasing(int currentDay, double money, string forecast, int temp)  // Open closed principle- code allows for more items to be added to store
+        public void Purchasing(int currentDay, double money, string forecast, int temp, Day day)  // Open closed principle- code allows for more items to be added to store
         {
             UserInterface.MenuReadout(currentDay, money, forecast, temp);
             UserInterface.DisplayInventory(player.inventory);
@@ -78,7 +74,7 @@ namespace LemonadeStand
                 case "go back":
                     break;
             }
-            PurchasingMenu(currentDay, player.wallet.GetMoney(), forecast, temp);
+            PurchasingMenu(currentDay, player.wallet.GetMoney(), forecast, temp, day);
         }
 
         public double BuyCups(double money, int currentDay)  // Open closed principle- code allows easy modification of price and ammount purchased

@@ -26,6 +26,7 @@ namespace LemonadeStand
         public void FillPitcher()  //single responsibility principle
         {
             cupsLeftInPitcher = 12;
+            Console.WriteLine("New pitcher mixed up");
         }
         public int CupsInPitcher()  //single responsibility principle
         {

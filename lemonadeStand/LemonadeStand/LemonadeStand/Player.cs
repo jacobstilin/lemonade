@@ -22,6 +22,33 @@ namespace LemonadeStand
             recipe = new Recipe();
             pitcher = new Pitcher();
         }
+
+        public bool PitcherCheck()
+        {
+            if (pitcher.CupsInPitcher() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool IngredientsCheck()
+        {
+                bool enough = CreatePitcher(recipe.ammountOfSugarCubes, recipe.ammountOfLemons, inventory.lemons.Count, inventory.sugarCubes.Count);
+                if (enough == true)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+        }
+
+
+
         public bool CreatePitcher(int sugarCubes, int lemons, int sugarCubesInInv, int lemonsInInv)  //single responsibility principle
         {
             if (sugarCubesInInv >= sugarCubes && lemonsInInv >= lemons)

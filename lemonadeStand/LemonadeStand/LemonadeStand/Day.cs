@@ -15,10 +15,26 @@ namespace LemonadeStand
         // constructor
         public Day()
         {
+            customers = new List<Customer>();
             weather = new Weather();
+            CreateCustomer();
+            
         }
 
         // methods
+        
+        private void CreateCustomer()
+        {
+            int dailyCustomers = new Random().Next(50, 100);
+            for (int i = 0; i < dailyCustomers; i++)
+            {
+                Customer customer = new Customer();
+                customers.Add(customer);
+
+            }
+        }
+
+
     }
 }
 
